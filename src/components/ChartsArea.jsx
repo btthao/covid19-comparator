@@ -122,10 +122,15 @@ function ChartsArea() {
     if (didMount) {
       country1 && fetchCountryData(country1, "cases");
       country1 && fetchCountryData(country1, "deaths");
+    }
+  }, [country1]);
+
+  useEffect(() => {
+    if (didMount) {
       country2 && fetchCountryData(country2, "cases");
       country2 && fetchCountryData(country2, "deaths");
     }
-  }, [country1, country2]);
+  }, [country2]);
 
   // update new data when changes countries
   useEffect(() => {

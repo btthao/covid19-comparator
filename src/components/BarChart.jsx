@@ -44,7 +44,15 @@ const useStyles = makeStyles((theme) => ({
 function Chart() {
   const classes = useStyles();
   const [
-    { country1, country2, showWorldWide, darkMode, overviewChartType },
+    {
+      country1,
+      country2,
+      fullName1,
+      fullName2,
+      showWorldWide,
+      darkMode,
+      overviewChartType,
+    },
     dispatch,
   ] = useStateContext();
   const color = darkMode ? "#9ea0a8" : "#293853";
@@ -147,12 +155,17 @@ function Chart() {
                 cursor={{ fill: "rgba(86, 109, 153, 0.6)" }}
                 labelStyle={{ color: "white" }}
                 contentStyle={chartTheme.tooltip}
-                formatter={(value) => {
-                  if (value >= 1000) {
-                    return numeral(value).format("0,0");
-                  } else {
-                    return value;
-                  }
+                formatter={(value, label) => {
+                  return [
+                    `${value >= 1000 ? numeral(value).format("0,0") : value}`,
+                    `${
+                      label == country1
+                        ? fullName1
+                        : label == country2
+                        ? fullName2
+                        : label
+                    }`,
+                  ];
                 }}
                 labelFormatter={(value) => {
                   return value + " /1M pop";

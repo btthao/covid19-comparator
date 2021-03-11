@@ -17,7 +17,7 @@ import { tickFormat, dateFormat } from "./utilities";
 
 function Chart({ data }) {
   const [
-    { country1, country2, showWorldWide, darkMode },
+    { country1, country2, fullName1, fullName2, showWorldWide, darkMode },
     dispatch,
   ] = useStateContext();
   const color = darkMode ? "#9ea0a8" : "#293853";
@@ -55,8 +55,17 @@ function Chart({ data }) {
           cursor={{ stroke: "white" }}
           labelStyle={{ color: "white" }}
           contentStyle={chartTheme.tooltip}
-          formatter={(value) => {
-            return numeral(value).format("0,0");
+          formatter={(value, label) => {
+            return [
+              numeral(value).format("0,0"),
+              `${
+                label == country1
+                  ? fullName1
+                  : label == country2
+                  ? fullName2
+                  : label
+              }`,
+            ];
           }}
           labelFormatter={(value) => {
             return moment(value, "M/D/YY").format("MMM Do, YYYY");

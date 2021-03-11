@@ -86,37 +86,23 @@ function Countries() {
     getCountryList();
   }, []);
 
-  const changeCountry1 = (e) => {
+  const changeCountry = (e, country) => {
     const value = e.target.value;
-    if (value !== country2) {
-      setCountry1(value);
+    const fullName = e.currentTarget.textContent;
+
+    if (value !== country1 && value !== country2) {
+      country == "country1" ? setCountry1(value) : setCountry2(value);
       dispatch({
         type: "SET_COUNTRY",
         payload: {
-          country: "country1",
+          country: country,
           name: value,
+          fullName,
         },
       });
     } else {
       alert(
-        "This country is already on the chart. Please choose a different one!"
-      );
-    }
-  };
-  const changeCountry2 = (e) => {
-    const value = e.target.value;
-    if (value !== country1) {
-      setCountry2(value);
-      dispatch({
-        type: "SET_COUNTRY",
-        payload: {
-          country: "country2",
-          name: value,
-        },
-      });
-    } else {
-      alert(
-        "This country is already on the chart. Please choose a different one!"
+        "This country is already on the charts. Please choose a different one!"
       );
     }
   };
@@ -172,7 +158,7 @@ function Countries() {
             </InputLabel>
             <Select
               value={country1}
-              onChange={changeCountry1}
+              onChange={(e) => changeCountry(e, "country1")}
               className={classes.select__countries}
               color="secondary"
             >
@@ -195,7 +181,7 @@ function Countries() {
             </InputLabel>
             <Select
               value={country2}
-              onChange={changeCountry2}
+              onChange={(e) => changeCountry(e, "country2")}
               className={classes.select__countries}
               color="secondary"
             >

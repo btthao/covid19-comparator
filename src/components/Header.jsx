@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     width: "100%",
     padding: "1.2rem 2.3rem",
-    // textAlign: "center",
     borderBottom: `solid 0.1rem ${theme.palette.primary.dark} `,
     background: theme.palette.primary.dark,
     "@media (max-width: 500px)": {
